@@ -33,12 +33,18 @@ body {
 } */
 
 .movie-block {
+  cursor: pointer;
   margin: 20px 10px;
   width: 200px;
 }
 
 .movie-block > img {
   width: 100%;
+  transition: 0.2s ease all;
+}
+
+.movie-block > img:hover {
+  opacity: 0.5;
 }
 
 .movie-block > p {

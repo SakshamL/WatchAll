@@ -6,6 +6,7 @@ import Searchbar from "./Components/Searchbar";
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   const MovieCallAPI = async () => {
     const APIURL =
@@ -18,15 +19,34 @@ function App() {
     setMovies(responseJSON.results);
   };
 
+  const GetMovieSearch = async () => {
+    const SEARCHAPI =
+      "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
+
+    const response = await fetch(SEARCHAPI + searchValue);
+    const responseJSON = await response.json();
+
+    // console.log(responseJSON);
+    setMovies(responseJSON.results);
+  };
+
+  const changeSearch = (event) => {
+    setSearchValue(event.target.value);
+  };
+
   useEffect(() => {
-    MovieCallAPI();
-  }, []);
+    if (searchValue === "") {
+      MovieCallAPI();
+    } else {
+      GetMovieSearch();
+    }
+  }, [searchValue]);
 
   return (
     <>
       <div className="header-text">
         <span>WatchAll</span>
-        <Searchbar />
+        <Searchbar searchValue={searchValue} onChange={changeSearch} />
       </div>
       <div className="container-fluid movie-row">
         <MovieList movies={movies} />
