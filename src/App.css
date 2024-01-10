@@ -1,4 +1,43 @@
-* {
-  margin: 0;
+body {
   padding: 0;
+  background: #141414;
+  color: #ffffff;
+}
+
+.header-text {
+  display: flex;
+  font-size: 18pt;
+  font-weight: bold;
+  margin: 20px;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.searchbox {
+  border-radius: 10px;
+  font-size: 14pt;
+  padding: 5px 10px;
+  width: 200%;
+}
+
+.movie-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* 
+.movie-row::-webkit-scrollbar {
+  display: none;
+} */
+
+.movie-block {
+  margin: 20px 10px;
+  width: 200px;
+}
+
+.movie-block > img {
+  width: 100%;
+}
+
+.movie-block > p {
+  overflow: wrap;
 }
