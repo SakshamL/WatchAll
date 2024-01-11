@@ -1,6 +1,6 @@
 body {
   margin: 0 auto;
-  padding: 0;
+  padding: 30px 0;
   background: #141414;
   color: #ffffff;
   width: 80%;
@@ -8,19 +8,24 @@ body {
 
 .header-text {
   display: flex;
-  font-size: 18pt;
+  font-size: 25pt;
   font-weight: bold;
   margin-top: 50px;
   margin-bottom: 50px;
   justify-content: space-around;
+  align-items: center;
   width: 50%;
+}
+
+.header-text > span {
+  color: maroon;
 }
 
 .searchbox {
   border-radius: 10px;
   font-size: 14pt;
   padding: 5px 10px;
-  width: 200%;
+  width: 320%;
 }
 
 .movie-row {
@@ -49,4 +54,14 @@ body {
 
 .movie-block > p {
   overflow: wrap;
+}
+
+.pagination_row {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.pagination_row > button {
+  margin: 0 20px;
 }
