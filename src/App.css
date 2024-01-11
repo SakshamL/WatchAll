@@ -26,6 +26,14 @@ body {
   font-size: 14pt;
   padding: 5px 10px;
   width: 320%;
+  outline: none;
+  background-color: #141414;
+  border: 1px solid rgba(0, 0, 0, 0);
+  color: white;
+}
+
+.searchbox:focus {
+  border-bottom: 1px solid maroon;
 }
 
 .movie-row {
@@ -40,7 +48,7 @@ body {
 .movie-block {
   cursor: pointer;
   margin: 20px 10px;
-  width: 200px;
+  width: 217px;
 }
 
 .movie-block > img {
@@ -58,10 +66,32 @@ body {
 
 .pagination_row {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   font-weight: bold;
+}
+
+.pagination_row > span {
+  margin: 0 20px;
+  border-radius: 10px;
+  font-size: 14pt;
+  padding: 5px 10px;
 }
 
 .pagination_row > button {
   margin: 0 20px;
+  font-size: 12pt;
+  padding: 5px 10px;
+  outline: none;
+  background-color: #141414;
+  border: none;
+  border-bottom: 1px solid maroon;
+  color: white;
+}
+
+.pagination_row > button:nth-child(1) {
+  border-left: 1px solid maroon;
+}
+
+.pagination_row > button:nth-child(3) {
+  border-right: 1px solid maroon;
 }

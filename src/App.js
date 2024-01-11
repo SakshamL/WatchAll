@@ -70,18 +70,27 @@ function App() {
     }
   }, [searchValue]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // UseEffect without dependency---------------------------
+  useEffect(() => {
+    // total_pages();
+  }, []);
+
   const nextPage = async () => {
     const APIURL =
       "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=";
-    const response = await fetch(
-      APIURL + (parseInt(default_page) + 1).toString(),
-      options
-    );
-    const responseJSON = await response.json();
-    setDefaultPage((parseInt(default_page) + 1).toString());
+    if (movies.length > 0) {
+      const response = await fetch(
+        APIURL + (parseInt(default_page) + 1).toString(),
+        options
+      );
+      const responseJSON = await response.json();
+      setDefaultPage((parseInt(default_page) + 1).toString());
 
-    // console.log(APIURL + (parseInt(default_page) + 1).toString());
-    setMovies(responseJSON.results);
+      // console.log(APIURL + (parseInt(default_page) + 1).toString());
+      setMovies(responseJSON.results);
+    } else {
+      return null;
+    }
   };
 
   const backPage = async () => {
@@ -101,6 +110,15 @@ function App() {
       return null;
     }
   };
+
+  // const total_pages = async () => {
+  //   const APIURL =
+  //     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
+  //   const response = await fetch(APIURL, options);
+  //   const responsetotalJSON = await response.json();
+
+  //   // console.log(responseJSON.total_pages);
+  // };
 
   return (
     <>
