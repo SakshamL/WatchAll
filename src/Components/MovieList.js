@@ -25,8 +25,7 @@ const MovieList = (props) => {
       {props.movies.map((movie, index) => {
         if (
           movie.poster_path !== null &&
-          (movie.original_language === "hi" ||
-            movie.original_language === "en" ||
+          (movie.original_language === "en" ||
             movie.original_language === "pa" ||
             movie.original_language === "ja" ||
             movie.original_language === "kn" ||
@@ -45,8 +44,13 @@ const MovieList = (props) => {
           return (
             <div key={index} className="movie-block">
               <img src={IMGPATH + movie.poster_path} alt="movie"></img>
-              <p>{movie.title}</p>
-              <p>{movie.release_date}</p>
+              <p className="movie-thumbnail-title">
+                {movie.title}
+                <br></br>
+                <span>( {movie.release_date} )</span>
+              </p>
+
+              {/* <p>{movie.release_date}</p> */}
             </div>
           );
         } else {

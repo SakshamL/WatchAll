@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import options from "./APIAuth";
 import MovieList from "./Components/MovieList";
 import MovieSearchList from "./Components/MovieSearchList";
 import Searchbar from "./Components/Searchbar";
-
-const options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YTcyYmZlOTVhNDUyNmJkYjBjYThkNGNlNmVjMDY3MyIsInN1YiI6IjViMGVlNTc3MGUwYTI2M2U0YzAwMTE4ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3x2UM6pYq17iM47ZMKLWxoW1m1Bp0hCBsGyPLygLkjE",
-  },
-};
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -42,21 +34,33 @@ function App() {
   };
 
   const GetMovieSearch = async () => {
-    // const SEARCHAPI =
-    //   "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
+    // const SEARCHAPI_1 = "https://api.themoviedb.org/3/search/movie?query=";
 
-    const SEARCHAPI_1 = "https://api.themoviedb.org/3/search/movie?query=";
+    // const SEARCHAPI_2 = "&include_adult=false&language=en-US&page=1";
 
-    const SEARCHAPI_2 = "&include_adult=false&language=en-US&page=1";
+    const SEARCHAPI = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`;
 
-    const response = await fetch(
-      SEARCHAPI_1 + searchValue + SEARCHAPI_2,
-      options
-    );
+    const response = await fetch(SEARCHAPI, options);
     const responseJSON = await response.json();
 
+    if (responseJSON.results) {
+      const array = responseJSON.results.sort((a, b) => {
+        if (a.release_date > b.release_date) {
+          return -1;
+        }
+        return true;
+      });
+
+      setMovies(array);
+    } else {
+      <>
+        <h3>No Search Results</h3>;
+      </>;
+    }
+
     // console.log(SEARCHAPI_1 + searchValue + SEARCHAPI_2);
-    setMovies(responseJSON.results);
+    // console.log(array);
+    // setMovies(responseJSON.results);
   };
 
   const changeSearch = (event) => {
@@ -123,16 +127,29 @@ function App() {
 
   return (
     <>
-      <div className="header-text">
-        <span>WatchAll</span>
+      <div className="header">
+        <span className="logo">WatchAll</span>
         <Searchbar searchValue={searchValue} onChange={changeSearch} />
+        <div className="menu">
+          <ul>
+            <li>Movies</li>
+            <li>TV Shows</li>
+            <li>Genre</li>
+            <li>All</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="row-heading">
+        <hr></hr>
+        <h4>Now Playing</h4>
+        <hr></hr>
       </div>
       <div className="pagination_row">
         <button onClick={backPage}>PEVIOUS PAGE</button>
         <span>{default_page}</span>
         <button onClick={nextPage}>NEXT PAGE</button>
       </div>
-
       <div className="container-fluid movie-row">
         <MovieSearchList movies={movies} />
         <MovieList movies={movies} />

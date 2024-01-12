@@ -9,8 +9,12 @@ const MovieSearchList = (props) => {
           return (
             <div key={index} className="movie-block">
               <img src={IMGPATH + movie.poster_path} alt="movie"></img>
-              <p>{movie.title}</p>
-              <p>{movie.release_date}</p>
+              <p className="movie-thumbnail-title">
+                {movie.title}
+                <br></br>
+                <span>( {movie.release_date} )</span>
+              </p>
+              {/* <p>({movie.release_date})</p> */}
             </div>
           );
         } else {
