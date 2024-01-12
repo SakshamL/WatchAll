@@ -138,16 +138,27 @@ function App() {
 
       <div className="row-heading">
         <hr></hr>
-        <h4>Now Playing</h4>
+        {searchValue ? <h4>Search Results</h4> : <h4>Now Playing</h4>}
+        {/* <h4>Now Playing</h4> */}
         <hr></hr>
       </div>
-      <div className="pagination_row">
-        <button onClick={backPage}>PEVIOUS PAGE</button>
-        <span>{default_page}</span>
-        <button onClick={nextPage}>NEXT PAGE</button>
-      </div>
+      {searchValue ? (
+        <hr className="mt-5"></hr>
+      ) : (
+        <div className="pagination_row">
+          <button onClick={backPage}>PEVIOUS PAGE</button>
+          <span>{default_page}</span>
+          <button onClick={nextPage}>NEXT PAGE</button>
+        </div>
+      )}
+
       <div className="container-fluid movie-row">
-        <MovieSearchList movies={movies} />
+        {movies.length === 0 ? (
+          <h3>No Search Results</h3>
+        ) : (
+          <MovieSearchList movies={movies} />
+        )}
+
         <MovieList movies={movies} />
       </div>
     </>
