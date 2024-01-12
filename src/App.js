@@ -52,10 +52,6 @@ function App() {
       });
 
       setMovies(array);
-    } else {
-      <>
-        <h3>No Search Results</h3>;
-      </>;
     }
 
     // console.log(SEARCHAPI_1 + searchValue + SEARCHAPI_2);
