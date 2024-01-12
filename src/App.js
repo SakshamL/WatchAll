@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MovieList from "./Components/MovieList";
+import MovieSearchList from "./Components/MovieSearchList";
 import Searchbar from "./Components/Searchbar";
 
 const options = {
@@ -133,6 +134,7 @@ function App() {
       </div>
 
       <div className="container-fluid movie-row">
+        <MovieSearchList movies={movies} />
         <MovieList movies={movies} />
       </div>
     </>
